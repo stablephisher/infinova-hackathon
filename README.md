@@ -1,164 +1,196 @@
-# InvoiceFlow - Tokenized Invoice Financing on Algorand
+# InvoiceFlow — Tokenized Invoice Financing on Algorand
 
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-brightgreen)
 ![License](https://img.shields.io/badge/License-MIT-blue)
-![Version](https://img.shields.io/badge/Version-1.0.0-blue)
+![Version](https://img.shields.io/badge/Version-2.0.0-blue)
+![Algorand](https://img.shields.io/badge/Blockchain-Algorand%20TestNet-black)
 
-A cutting-edge decentralized finance (DeFi) platform for **tokenized invoice financing** built on the **Algorand blockchain**. This full-stack dApp enables suppliers to tokenize invoices as ASAs, investors to fund them, and automates settlement with secure atomic transactions.
+A cutting-edge decentralized finance (DeFi) platform for **tokenized invoice financing** built on the **Algorand blockchain**. Suppliers tokenize invoices as ASAs, investors fund them with AI-driven risk assessment, and settlements are automated via secure atomic transactions.
+
+---
+
+## 📸 Screenshots
+
+### Desktop — Login & Hero
+![Desktop screenshot](docs/screenshot_desktop.png)
+
+### Mobile — Responsive Layout
+![Mobile screenshot](docs/screenshot_mobile.png)
+
+### UI Demo Recording
+![UI demo recording](docs/ui_demo_recording.webp)
+
+---
 
 ## 🚀 Features
 
 ### Core Functionality
-- **Invoice Tokenization**: Convert invoices into Algorand Standard Assets (ASA) for trading
-- **Smart Contracts**: PyTeal contracts for secure financing, settlement, and ownership transfer
-- **Atomic Transactions**: All-or-nothing execution preventing partial failures
-- **AI Risk Scoring**: Intelligent evaluation of invoice risk and interest rates
-- **Liquidity Pool**: Decentralized funding pool for investors
-- **Automated Settlement**: On-due-date settlement with interest calculation
-- **Wallet Integration**: Seamless Pera Wallet and AlgoSigner connectivity
+- **Invoice Tokenization** — Convert invoices into Algorand Standard Assets (ASA) for on-chain trading
+- **Smart Contracts** — PyTeal contracts for secure financing, settlement, and ownership transfer
+- **Atomic Transactions** — All-or-nothing execution prevents partial failures
+- **AI Risk Scoring** — Intelligent evaluation of invoice risk and recommended interest rates
+- **Liquidity Pool** — Decentralized funding pool for investors with deposit/withdrawal
+- **Automated Settlement** — On-due-date settlement with interest calculation
+- **Pera Wallet Integration** — Native `@perawallet/connect` SDK with session persistence and reconnection
 
-### Advanced Features
-- **Real-time Analytics**: Live tracking of invoices, ROI, and platform metrics
-- **Risk Assessment**: AI module evaluates supplier creditworthiness
-- **Transaction Logging**: Complete audit trail of all operations
-- **Dark Fintech UI**: Modern, responsive dashboard with Tailwind CSS
-- **RESTful API**: Comprehensive backend API for all operations
-- **Production-Ready**: Error handling, validation, and authentication ready
+### Frontend & UX
+- **Premium Fintech UI** — Glassmorphism, gradient borders, animated counters, micro-interactions
+- **Wallet Modal** — Centered modal for wallet connection with step-by-step guide
+- **Animated Analytics** — Count-up metrics, gradient progress bars, transaction timeline
+- **Responsive Design** — Fully responsive from mobile (375px) to desktop (1440px+)
+- **Dark Mode** — Sleek dark theme with custom scrollbars and selection colors
+- **10+ CSS Animations** — Fade-in, slide-up, scale-in, float, shimmer, pulse-glow, stagger, gradient-shift
+- **Deposit Modal** — Proper in-app deposit flow (no `window.prompt`)
+- **Dismissible Alerts** — Error and success messages with close buttons
+
+### Backend & API
+- **RESTful API** — Comprehensive Express.js API for all CRUD operations
+- **Transaction Logging** — Complete audit trail of all operations
+- **Risk Scoring Engine** — Multi-factor AI evaluation model
+- **Production-Ready** — Error handling, validation, CORS, and auth-ready
+
+---
 
 ## 🏗️ Architecture
 
 ```
-InvoiceFlow
-├── smart-contracts/          # PyTeal smart contracts for Algorand
-├── backend/                  # Node.js + Express API server
-├── frontend/                 # React + Tailwind CSS dashboard
-├── ai-service/              # Python FastAPI risk scoring service
-└── scripts/                 # Deployment and setup scripts
+InvoiceFlow/
+├── frontend/               # React 18 + Tailwind CSS 3 dashboard
+│   └── src/
+│       ├── App.js              # Main shell, routing, wallet modal
+│       ├── firebase.js         # Firebase Auth (Google SSO)
+│       ├── index.css           # Design system (glassmorphism, animations)
+│       └── components/
+│           ├── WalletConnect.js     # Pera Wallet SDK integration
+│           ├── SupplierPanel.js     # Invoice creation & management
+│           ├── InvestorPanel.js     # Funding, risk assessment, deposits
+│           └── Analytics.js         # Platform metrics & transaction log
+├── backend/                # Node.js + Express API server
+│   └── server.js               # REST API, in-memory store, risk scoring
+├── smart-contracts/        # PyTeal smart contracts for Algorand
+│   ├── invoice_contract.py     # Invoice tokenization & settlement logic
+│   └── compile.py              # Contract compilation utility
+├── ai-service/             # Python FastAPI risk scoring service
+├── scripts/                # Setup & deployment scripts
+└── docs/                   # Screenshots & documentation
 ```
+
+---
 
 ## 🛠️ Tech Stack
 
 | Layer | Technology |
 |-------|-----------|
-| **Blockchain** | Algorand, PyTeal |
-| **Frontend** | React.js, Tailwind CSS, Pera Wallet |
-| **Backend** | Node.js, Express.js, AlgoSDK |
+| **Blockchain** | Algorand TestNet, PyTeal, AlgoSDK |
+| **Frontend** | React 18, Tailwind CSS 3, `@perawallet/connect` |
+| **Auth** | Firebase Authentication (Google SSO) |
+| **Backend** | Node.js, Express.js |
 | **AI/ML** | Python, FastAPI, NumPy |
-| **Database** | In-memory (production: MongoDB) |
-| **Storage** | IPFS ready (optional) |
+| **Design** | Glassmorphism, CSS animations, Inter font |
+
+---
 
 ## 📋 Prerequisites
 
 - **Node.js** >= 16.0.0
 - **Python** >= 3.8
 - **npm** or **yarn**
-- **Algorand LocalNet** or TestNet access
-- **Pera Wallet** or **AlgoSigner** browser extension
+- **Algorand TestNet** access
+- **Pera Wallet** app on your phone (for QR code scanning)
+
+---
 
 ## 🚀 Quick Start
 
-### 1. Clone and Setup
+### 1. Clone & Install
 
 ```bash
 git clone <repo-url>
 cd infinova-hackathon
-bash scripts/setup.sh
 ```
 
-### 2. Configure Environment
-
-**Backend** (`backend/.env`):
-```env
-NODE_ENV=development
-PORT=3001
-ALGOD_TOKEN=a
-ALGOD_SERVER=http://localhost
-ALGOD_PORT=4001
-INDEXER_SERVER=http://localhost
-INDEXER_PORT=8980
-```
-
-**Frontend** (`frontend/.env`):
-```env
-REACT_APP_API_URL=http://localhost:3001
-REACT_APP_NETWORK=testnet
-```
-
-### 3. Start All Services
+### 2. Start Backend
 
 ```bash
-# Terminal 1: Start Backend
-cd backend && npm start
-
-# Terminal 2: Start AI Service
-cd ai-service && python main.py
-
-# Terminal 3: Start Frontend
-cd frontend && npm start
+cd backend
+npm install
+npm start
+# Runs on http://localhost:3001
 ```
 
-Or use the automated script:
+### 3. Start AI Service (optional)
+
 ```bash
-bash scripts/run-demo.sh
+cd ai-service
+pip install -r requirements.txt
+python main.py
+# Runs on http://localhost:8000
 ```
 
-### 4. Access the Application
+### 4. Start Frontend
 
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:3001
-- **AI Service API**: http://localhost:8000
-- **API Docs**: http://localhost:8000/docs
+```bash
+cd frontend
+npm install
+npm start
+# Opens http://localhost:3000
+```
+
+### 5. Connect & Trade
+
+1. Sign in with Google (Firebase Auth)
+2. Click **"Connect Wallet"** → scan QR with Pera Wallet app
+3. Create invoices (Supplier tab) or fund them (Investor tab)
+4. Monitor platform metrics on the Analytics tab
+
+---
+
+## 🔗 Pera Wallet Integration
+
+The wallet integration uses the official `@perawallet/connect` npm SDK:
+
+```javascript
+import { PeraWalletConnect } from '@perawallet/connect';
+
+const peraWallet = new PeraWalletConnect({ chainId: 416002 }); // TestNet
+
+// Connect
+const accounts = await peraWallet.connect();
+
+// Reconnect on page refresh
+const accounts = await peraWallet.reconnectSession();
+
+// Disconnect
+await peraWallet.disconnect();
+```
+
+**Features:**
+- Session persistence across page refreshes via `reconnectSession()`
+- Proper disconnect lifecycle with SDK cleanup
+- Graceful handling of user-cancelled modals
+- Singleton instance pattern to avoid duplicate connections
+- Network indicator badge (TestNet / MainNet)
+
+---
 
 ## 📱 User Workflows
 
 ### Supplier Workflow
-1. Connect Algorand wallet
-2. Create invoice with buyer address and amount
-3. Invoice is tokenized as ASA
-4. Request financing from platform
-5. Receive funds in wallet upon approval
-6. Invoice transferred to financier as ownership proof
+1. Sign in → Connect Pera Wallet
+2. Create invoice with buyer address, amount, and due date
+3. Invoice tokenized as ASA on Algorand
+4. Request financing — investors notified
+5. Receive funds upon investor approval
+6. Invoice ownership transferred to financier
 
 ### Investor Workflow
-1. Connect wallet and deposit to liquidity pool
-2. Browse available invoices
-3. View AI-calculated risk scores
-4. Select financing amount and interest rate
-5. Fund invoice via atomic transaction
-6. Receive repayment at maturity plus earned interest
+1. Sign in → Connect Pera Wallet → Deposit ALGO to pool
+2. Browse available invoices with AI risk scores
+3. Select financing amount and interest rate
+4. Fund invoice via atomic transaction
+5. Receive repayment at maturity + earned interest
 
-### Admin/Platform Workflow
-1. Monitor all invoices and transactions
-2. View ROI and platform metrics
-3. Manage liquidity pool
-4. Track settlement and default rates
-
-## 🔐 Smart Contract Functions
-
-```solidity
-// Create tokenized invoice
-create_invoice(
-  amount: uint64,
-  buyer_address: bytes,
-  due_date: uint64,
-  metadata_hash: bytes
-) -> invoice_id
-
-// Finance an invoice
-finance_invoice(
-  invoice_id: uint64,
-  interest_rate: uint64
-) -> void
-// Atomically: transfers ASA + pays supplier
-
-// Settle invoice on maturity
-settle_invoice(invoice_id: uint64) -> void
-// Pays financier: principal + (principal * interest_rate)
-
-// Manage liquidity pool
-deposit_to_pool(amount: uint64) -> void
-withdraw_from_pool(amount: uint64) -> void
-```
+---
 
 ## 📊 API Endpoints
 
@@ -167,206 +199,167 @@ withdraw_from_pool(amount: uint64) -> void
 POST   /api/invoices              Create invoice
 GET    /api/invoices              List all invoices
 GET    /api/invoices/:id          Get invoice details
-POST   /api/invoices/:id/finance  Finance invoice
-POST   /api/invoices/:id/settle   Settle invoice
+POST   /api/invoices/:id/finance  Finance an invoice
+POST   /api/invoices/:id/settle   Settle an invoice
 ```
 
 ### Risk Scoring
 ```
-POST   /api/risk-score            Calculate risk score
+POST   /api/risk-score            Calculate AI risk score
 ```
 
 ### Liquidity Pool
 ```
-POST   /api/pool/deposit          Deposit to pool
+POST   /api/pool/deposit          Deposit ALGO to pool
 GET    /api/pool/:address         Get pool balance
 ```
 
-### Analytics
+### Analytics & Health
 ```
 GET    /api/analytics             Platform metrics
 GET    /api/transactions          Transaction logs
-GET    /api/health               Health check
+GET    /api/health                Health check
 ```
+
+---
 
 ## 🔍 AI Risk Scoring Model
 
-The AI service evaluates invoices using:
+The AI service evaluates invoices using a weighted multi-factor model:
 
-- **Supplier History Score** (25%): Past performance and reliability
-- **Credit Score** (20%): Financial creditworthiness
-- **Amount Risk** (15%): Invoice size vs. market exposure
-- **Payment Timeliness** (15%): On-time payment ratio
-- **Due Date** (10%): Payment term length
-- **Transaction Count** (10%): Experience and volume
-- **Default History** (5%): Past defaults and charge-backs
+| Factor | Weight | Description |
+|--------|--------|-------------|
+| Supplier History | 25% | Past performance and reliability |
+| Credit Score | 20% | Financial creditworthiness |
+| Amount Risk | 15% | Invoice size vs. market exposure |
+| Payment Timeliness | 15% | On-time payment ratio |
+| Due Date | 10% | Payment term length |
+| Transaction Count | 10% | Experience and volume |
+| Default History | 5% | Past defaults |
 
-**Output**: Risk Level (Low/Medium/High) + Suggested Interest Rate
-
-## 💰 Economic Model
+**Output:** Risk Level (Low / Medium / High) + Suggested Interest Rate
 
 | Risk Level | Interest Rate | Recommended Funding | Risk Score |
 |-----------|---------------|-------------------|-----------|
-| Low | 5% | 100% | >= 0.70 |
-| Medium | 10% | 80% | 0.40 - 0.70 |
+| Low | 5% | 100% | ≥ 0.70 |
+| Medium | 10% | 80% | 0.40 – 0.70 |
 | High | 20% | 60% | < 0.40 |
 
-## 🔒 Security Features6
+---
 
-- ✅ Input validation on all endpoints
-- ✅ Address format verification
+## 🎨 Design System
+
+The frontend uses a custom CSS design system built on Tailwind CSS 3:
+
+### Components
+- `.glass` / `.glass-strong` — Glassmorphism cards with backdrop blur
+- `.gradient-text` — Gradient text clipping (blue → cyan → teal)
+- `.card-hover` — Cards with hover lift, border glow, and scale
+- `.btn-primary` / `.btn-secondary` / `.btn-ghost` — Button variants with scale transforms
+- `.badge-success` / `.badge-warning` / `.badge-danger` / `.badge-info` — Status badges
+- `.input` — Styled inputs with focus ring animations
+- `.gradient-border` — CSS mask-based gradient borders
+
+### Animations
+| Class | Effect |
+|-------|--------|
+| `.animate-fade-in` | Fade + translateY |
+| `.animate-slide-up` | Slide up with fade |
+| `.animate-scale-in` | Scale from 0.92 → 1 |
+| `.animate-float` | Gentle vertical float |
+| `.animate-shimmer` | Shimmer sweep overlay |
+| `.animate-pulse-dot` | Pulsing connection dot |
+| `.animate-gradient` | Background gradient shift |
+| `.stagger-children` | Staggered child delays (80ms intervals) |
+
+---
+
+## 🔐 Security
+
+- ✅ Firebase Authentication (Google SSO)
+- ✅ Input validation on all API endpoints
+- ✅ Algorand address format verification (58-char, starts with A)
 - ✅ Amount range checks
 - ✅ Atomic transaction guarantees
-- ✅ Wallet-based authentication
-- ✅ State immutability on blockchain
 - ✅ CORS protection
+- ✅ State immutability on blockchain
 - ✅ Error logging and monitoring
 
-## 📈 Performance Metrics
+---
+
+## 📈 Performance
 
 - **Transaction Finality**: < 5 seconds (Algorand)
-- **API Response Time**: < 200ms (average)
-- **Concurrent Users**: Tested up to 1000+
-- **Through put**: 1000+ transactions/second (Algorand)
-- **Data Storage**: Minimal on-chain, metadata off-chain
+- **API Response Time**: < 200ms average
+- **Frontend Build**: Optimized React 18 with code splitting
+- **Throughput**: 1000+ TPS (Algorand network)
+- **Wallet Reconnect**: Instant session restoration
+
+---
 
 ## 🧪 Testing
 
 ```bash
-# Unit tests
+# Frontend tests
 cd frontend && npm test
+
+# Backend tests
 cd backend && npm test
 
-# Integration tests
-npm run test:integration
-
-# Load testing
-npm run test:load
-
-# Smart contract testing
+# Smart contract tests
 cd smart-contracts && pytest tests/
 ```
 
-## 📝 Documentation
+---
 
-### Smart Contracts
-- [Smart Contract Architecture](docs/smart-contract.md)
-- [PyTeal Implementation](smart-contracts/invoice_contract.py)
-- [Contract Functions](docs/contract-functions.md)
-
-### API Reference
-- [REST API Documentation](docs/api-reference.md)
-- [Event Logging](docs/events.md)
-- [Error Handling](docs/errors.md)
-
-### Deployment
-- [Deployment Guide](docs/deployment.md)
-- [MainNet Configuration](docs/mainnet.md)
-- [Monitoring & Maintenance](docs/monitoring.md)
-
-## 🌐 Deployment Options
+## 🌐 Deployment
 
 ### Local Development
 ```bash
-bash scripts/setup.sh
-bash scripts/run-demo.sh
+# Start all services
+cd backend && npm start        # Terminal 1
+cd ai-service && python main.py # Terminal 2
+cd frontend && npm start        # Terminal 3
 ```
 
 ### TestNet
-1. Point `.env` to TestNet RPC endpoints
+1. Configure `.env` with TestNet RPC endpoints
 2. Deploy contracts to TestNet
 3. Update frontend configuration
 4. Run: `npm run deploy:testnet`
 
-### MainNet
+### Production
 1. Audit smart contracts
 2. Configure MainNet endpoints
-3. Deploy with: `npm run deploy:mainnet`
-4. Enable production security settings
+3. Enable production security settings
+4. Deploy with: `npm run deploy:mainnet`
+
+---
 
 ## 🤝 Contributing
 
 ```bash
-# Fork repository
-# Create feature branch
-git checkout -b feature/amazing-feature
-# Commit changes
-git commit -m 'Add amazing feature'
-# Push to branch
-git push origin feature/amazing-feature
+git checkout -b feature/your-feature
+git commit -m 'Add your feature'
+git push origin feature/your-feature
 # Open Pull Request
 ```
 
+---
+
 ## 📄 License
 
-MIT License - see LICENSE file for details
+MIT License — see [LICENSE](LICENSE) for details.
 
 ## 🙏 Acknowledgments
 
-- Algorand Foundation for blockchain infrastructure
-- PyTeal community for smart contract tools
-- React and Tailwind CSS communities
-
-## 📞 Support & Community
-
-- **Discord**: [Join Discord Server]
-- **Twitter**: [@InvoiceFlow]
-- **GitHub Issues**: [Report Issues]
-- **Email**: support@invoiceflow.io
-
-## 🔗 Links
-
-- **Live Demo**: https://invoiceflow.io
-- **GitHub Repository**: https://github.com/invoiceflow/
-- **Documentation**: https://docs.invoiceflow.io
-- **Algorand**: https://www.algorand.com
+- [Algorand Foundation](https://www.algorand.com) — blockchain infrastructure
+- [Pera Wallet](https://perawallet.app) — wallet SDK
+- [PyTeal](https://pyteal.readthedocs.io) — smart contract framework
+- [React](https://react.dev) & [Tailwind CSS](https://tailwindcss.com) — frontend
 
 ---
 
 **Built with ❤️ for the Algorand and DeFi communities**
 
-Made for Hackathon 2026 - Ready to Win! 🏆
-
-└── docs/               # Documentation
-```
-
-## Setup
-
-1. **Smart Contracts**:
-   ```bash
-   cd smart-contracts
-   pip install -r requirements.txt
-   python invoice_contract.py
-   ```
-
-2. **AI Service**:
-   ```bash
-   cd ai-service
-   pip install -r requirements.txt
-   python main.py
-   ```
-
-3. **Backend**:
-   ```bash
-   cd backend
-   npm install
-   npm start
-   ```
-
-4. **Frontend**:
-   ```bash
-   cd frontend
-   npm install
-   npm start
-   ```
-
-## Usage
-
-1. Suppliers create and tokenize invoices
-2. AI service evaluates risk scores
-3. Investors fund invoices through atomic transactions
-4. Automatic settlement on due dates
-
-## License
-
-MIT
+Made for Infinova Hackathon 2026 🏆
